@@ -5,7 +5,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local LocalPlayer = Players.LocalPlayer
 local remote = ReplicatedStorage:WaitForChild("Event")
 
-local a = {11967105381, 11945987565}
+-- ⚠️ PON EL ID DE ELLA AQUÍ
+local a = {11967105381, 11945987565, 0} -- Cambia el 0 por el ID del iPad
 local b = false
 for _, c in ipairs(a) do
     if LocalPlayer.UserId == c then b = true break end
@@ -61,12 +62,10 @@ local function stopSpamming()
     loopRunning = false
 end
 
+-- CONTROLES PARA PC O CONTROL (Mando)
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed or not enabled then return end
     if input.UserInputType == Enum.UserInputType.Gamepad1 and input.KeyCode == Enum.KeyCode.ButtonR2 then
-        holding = true
-        startSpamming()
-    elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
         holding = true
         startSpamming()
     end
@@ -76,23 +75,28 @@ UserInputService.InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.Gamepad1 and input.KeyCode == Enum.KeyCode.ButtonR2 then
         holding = false
         stopSpamming()
-    elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+    end
+end)
+
+-- ==================== CONTROLES PARA IPAD / TELÉFONO ====================
+-- Aquí está el truco: Ignoramos el gameProcessed para que funcione en el iPad
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not enabled then return end
+    if input.UserInputType == Enum.UserInputType.Touch then
+        holding = true
+        startSpamming()
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch then
         holding = false
         stopSpamming()
     end
 end)
 
-UserInputService.TouchStarted:Connect(function(_, gameProcessed)
-    if gameProcessed or not enabled then return end
-    holding = true
-    startSpamming()
-end)
-
-UserInputService.TouchEnded:Connect(function()
-    holding = false
-    stopSpamming()
-end)
-
+-- TOGGLE (RightShift)
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
     if input.KeyCode == Enum.KeyCode.RightShift then
