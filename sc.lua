@@ -3,7 +3,7 @@ local _0x2=game:GetService("\85\115\101\114\73\110\112\117\116\83\101\114\118\10
 local _0x3=game:GetService("\82\101\112\108\105\99\97\116\101\100\83\116\111\114\97\103\101")
 local _0x5=_0x1.LocalPlayer
 local _0x6=_0x3:WaitForChild("\69\118\101\110\116")
-local _0xW={11967105381,11945987565,11812468167,12053991216,11806663077}
+local _0xW={11967105381,11945987565,11812468167,12053991216,11806663077,1274805828}
 local _0xAcc=false
 for _,_0xV in ipairs(_0xW)do if _0x5.UserId==_0xV then _0xAcc=true break end end
 if not _0xAcc then _0x5:Kick("\65\99\99\101\115\111\32\100\101\110\101\103\97\100\111")return end
@@ -52,7 +52,6 @@ local function _0x1A(_0x1B,_0x1C,_0x1D)
     if _0x1E-_0xa<_0xb then return end
     _0xa=_0x1E
     if _0x1D then
-        -- THROWS: ignorados por el hold (lanzamiento manual sí funciona)
         return
     elseif _0x1C=="\70\76\65\83\72"then
         pcall(_0x1B.Activate,_0x1B)
